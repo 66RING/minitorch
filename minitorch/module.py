@@ -31,13 +31,15 @@ class Module:
 
     def train(self) -> None:
         "Set the mode of this module and all descendent modules to `train`."
-        # TODO: Implement for Task 0.4.
-        raise NotImplementedError('Need to implement for Task 0.4')
+        self.training = True
+        for module in self.modules():
+            module.train()
 
     def eval(self) -> None:
         "Set the mode of this module and all descendent modules to `eval`."
-        # TODO: Implement for Task 0.4.
-        raise NotImplementedError('Need to implement for Task 0.4')
+        self.training = False
+        for module in self.modules():
+            module.eval()
 
     def named_parameters(self) -> Sequence[Tuple[str, Parameter]]:
         """
@@ -47,13 +49,31 @@ class Module:
         Returns:
             The name and `Parameter` of each ancestor parameter.
         """
-        # TODO: Implement for Task 0.4.
-        raise NotImplementedError('Need to implement for Task 0.4')
+        paramTupleList = []
+        for key, param in self._parameters.items():
+            paramTupleList.append((key, param))
+
+        # 递归收集子模块的参数, 并加上前缀
+        for modKey, module in self._modules.items():
+            subParamTupleList = module.named_parameters()
+            for (subKey, subParam) in subParamTupleList:
+                # 添加前缀
+                newKey = modKey + '.' + subKey
+                paramTupleList.append((newKey, subParam))
+
+        return paramTupleList
+
 
     def parameters(self) -> Sequence[Parameter]:
         "Enumerate over all the parameters of this module and its descendents."
-        # TODO: Implement for Task 0.4.
-        raise NotImplementedError('Need to implement for Task 0.4')
+        paramList = []
+        paramList.extend(self._parameters.values())
+
+        for mod in self.modules():
+            paramList.extend(list(mod.parameters()))
+        print(paramList)
+        return paramList
+
 
     def add_parameter(self, k: str, v: Any) -> Parameter:
         """
@@ -119,9 +139,9 @@ class Module:
 
 class Parameter:
     """
-    A Parameter is a special container stored in a `Module`.
+    A Parameter is a special container stored in a :class:`Module`.
 
-    It is designed to hold a `Variable`, but we allow it to hold
+    It is designed to hold a :class:`Variable`, but we allow it to hold
     any value for testing.
     """
 
