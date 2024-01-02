@@ -12,3 +12,6 @@
 
 11:
 	pytest tests/test_autodiff.py -m=task1_1
+
+12:
+	pytest tests/test_scalar.py -m=task1_2
