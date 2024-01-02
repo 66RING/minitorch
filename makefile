@@ -15,3 +15,10 @@
 
 12:
 	pytest tests/test_scalar.py -m=task1_2
+
+13:
+	pytest tests/test_autodiff.py -m=task1_3
+
+14:
+	pytest tests/test_autodiff.py -m=task1_4
+

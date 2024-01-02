@@ -163,8 +163,10 @@ class Scalar:
         assert h.last_fn is not None
         assert h.ctx is not None
 
-        # TODO: Implement for Task 1.3.
-        raise NotImplementedError('Need to implement for Task 1.3')
+        # NOTE:使用ctx计算bwd的梯度并合并上当前函数的梯度d_output
+        grads = h.last_fn._backward(h.ctx, d_output)
+        return zip(h.inputs, grads)
+
 
     def backward(self, d_output: Optional[float] = None) -> None:
         """
