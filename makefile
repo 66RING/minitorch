@@ -9,3 +9,6 @@
 
 04:
 	pytest tests/test_module.py -m=task0_4
+
+11:
+	pytest tests/test_autodiff.py -m=task1_1
