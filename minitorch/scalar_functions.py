@@ -47,7 +47,9 @@ class ScalarFunction:
 
     @classmethod
     def apply(cls, *vals: "ScalarLike") -> Scalar:
+        # 用于计算
         raw_vals = []
+        # 用于做历史记录
         scalars = []
         for v in vals:
             if isinstance(v, minitorch.scalar.Scalar):

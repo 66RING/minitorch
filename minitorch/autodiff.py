@@ -36,6 +36,7 @@ def central_difference(f: Any, *vals: Any, arg: int = 0, epsilon: float = 1e-6) 
 variable_count = 1
 
 
+# Variable(Protocol)相当于某种抽象类
 class Variable(Protocol):
     def accumulate_derivative(self, x: Any) -> None:
         pass

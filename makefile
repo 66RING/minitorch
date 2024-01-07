@@ -22,3 +22,15 @@
 14:
 	pytest tests/test_autodiff.py -m=task1_4
 
+21:
+	pytest tests/test_tensor_data.py -m=task2_1
+
+22:
+	pytest tests/test_tensor_data.py -m=task2_2
+
+23:
+	pytest tests/test_tensor.py -m=task2_3
+
+24:
+	pytest tests/test_tensor.py -m=task2_4
+
